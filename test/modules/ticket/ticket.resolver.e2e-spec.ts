@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../../../src/app.module'; // Замініть на шлях до вашого AppModule
+import { AppModule } from '../../../src/app.module';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
@@ -8,7 +8,7 @@ describe('TicketResolver (e2e)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule], // Замініть AppModule на вашу головну модуль додатку
+      imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -20,10 +20,10 @@ describe('TicketResolver (e2e)', () => {
   });
 
   it('should return an array of tickets when querying by event ID', async () => {
-    const eventId = 1195; // Замініть на дійсний ID події для перевірки
+    const eventId = 1195;
 
     const response = await request(app.getHttpServer())
-      .post('/graphql') // Адреса GraphQL сервера
+      .post('/graphql')
       .send({
         query: `
           query {
@@ -66,10 +66,10 @@ describe('TicketResolver (e2e)', () => {
   });
 
   it('should return a error when querying by event invalid ID', async () => {
-    const eventId = 'string'; // Замініть на дійсний ID події для перевірки
+    const eventId = 'string';
 
     const response = await request(app.getHttpServer())
-      .post('/graphql') // Адреса GraphQL сервера
+      .post('/graphql')
       .send({
         query: `
           query {
