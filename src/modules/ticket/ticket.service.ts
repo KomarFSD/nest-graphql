@@ -11,10 +11,7 @@ export class TicketService {
     await this.isValidEvent(id);
     const { seats, zones, prices } = await this.getEventsDataById(id);
     const freeSeats = seats.filter((seat) => seat.SeatStatusId === 0);
-    const allZones = zones.reduce((acc: Zone[], { Zones }) => {
-      acc.push(...Zones);
-      return acc;
-    }, []);
+    const allZones = zones.flatMap(({ Zones }) => Zones);
     const filteredPrises = prices.filter((price) => price.PerformanceId === 0);
 
     return this.getTickets(freeSeats, allZones, filteredPrises);
